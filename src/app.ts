@@ -3,6 +3,7 @@
 import express from 'express';
 import quotesRouter from './routing/quotes-routing';
 import commentsRouter from './routing/comments-routing';
+import categoriesRouter from './routing/categories-routing';
 
 // Za konekciju nad bazom 
 import { dbConfig } from './common/config';
@@ -30,6 +31,7 @@ class App {
     private routing(){
         this.serverApp.use("/quotes", quotesRouter);
         this.serverApp.use("/comments", commentsRouter);
+        this.serverApp.use('/categories', categoriesRouter);
     }
 
     private connectToDB(){

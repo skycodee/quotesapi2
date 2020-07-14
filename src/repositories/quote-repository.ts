@@ -4,7 +4,7 @@ import { Quote } from "../models/quote-model"
 export class QuoteRepository {
 
     getAllQuotes = () => {
-        return getManager().getRepository(Quote).find();
+        return getManager().getRepository(Quote).find({relations: ['comments', 'categories']});
     }
 
     getQuoteByID = (id: number) => {

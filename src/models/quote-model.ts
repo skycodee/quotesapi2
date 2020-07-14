@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToMany, JoinTable } from "typeorm";
 import { Comment } from './comment-model';
+import { Category } from "./category-model";
 
 @Entity("quotes")
 export class Quote {
@@ -34,4 +35,16 @@ export class Quote {
 
     @OneToMany(type => Comment, comment => comment.quote)
     comments: Comment[];
+
+    @ManyToMany(type => Category)
+    @JoinTable({
+        name: 'quotes_categories',
+        joinColumns: [
+            { name: 'quote_id' }
+        ],
+        inverseJoinColumns: [
+            { name: 'category_id' }
+        ]
+    })
+    categories: Category[];
 }
